@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
     <!-- Navbar -->
@@ -77,24 +78,24 @@
     </div>
 
 <!-- Navbar Bawah -->
-    <div class="navbar-bottom">
-        <div class="nav-item active">
+<div class="navbar-bottom">
+        <div class="nav-item active" id="home">
             <i class="fas fa-home"></i>
             <span>Beranda</span>
         </div>
-        <div class="nav-item">
+        <div class="nav-item" id="search">
             <i class="fas fa-search"></i>
             <span>Cari</span>
         </div>
-        <div class="nav-item">
+        <div class="nav-item" id="add">
             <i class="fas fa-plus-square"></i>
             <span>Tambah</span>
         </div>
-        <div class="nav-item">
+        <div class="nav-item" id="reels">
             <i class="fas fa-video"></i>
             <span>Reels</span>
         </div>
-        <div class="nav-item">
+        <div class="nav-item" id="profile">
             <i class="fas fa-user"></i>
             <span>Profil</span>
         </div>
@@ -117,6 +118,28 @@ window.addEventListener("click", (e) => {
         dropdownMenu.style.display = "none";
     }
 });
+    </script>
+
+    <script>
+        // Navigasi aktif
+        const navItems = document.querySelectorAll(".nav-item");
+        navItems.forEach(item => {
+            item.addEventListener("click", () => {
+                navItems.forEach(i => i.classList.remove("active"));
+                item.classList.add("active");
+
+                // Simulasi pindah halaman
+                if (item.id === "search") {
+                    alert("Fitur Cari belum tersedia!");
+                } else if (item.id === "add") {
+                    alert("Fitur Tambah belum tersedia!");
+                } else if (item.id === "reels") {
+                    alert("Fitur Reels belum tersedia!");
+                } else if (item.id === "profile") {
+                    alert("Fitur Profil belum tersedia!");
+                }
+            });
+        });
     </script>
 </body>
 </html>
