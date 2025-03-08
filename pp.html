@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h1>Welcome ibu🤗</h1>
+        <div class="icons">
+    <span>🔔</span>
+    <span>➕</span>
+    <span id="menu-btn">☰</span> <!-- Tombol titik tiga -->
+</div>
+
+<!-- Dropdown Menu -->
+<div id="dropdown-menu" class="dropdown">
+    <ul>
+        <li><a href="#">Pengaturan</a></li>
+        <li><a href="#">Mode Gelap</a></li>
+        <li><a href="#">Keluar</a></li>
+    </ul>
+</div>
+    </nav>
+
+    <!-- Profil -->
+    <div class="profile-container">
+        <div class="profile-header">
+            <img src="pp.jpg" alt="Foto Profil" class="profile-pic">
+            <div class="profile-info">
+                <h1 class="username">paus_goreng8</h1>
+                <h3 class="name">Guntur padilah</h3>
+                <p class="bio">Nothing is impossible</p>
+                <p class="followers"><b>19rb</b> Pengikut • <b>140</b> Mengikuti</p>
+                <button class="edit-btn">Edit Profil</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Highlights -->
+    <div class="highlights">
+        <div class="highlight">+ Baru</div>
+        <div class="highlight">🏝️</div>
+        <div class="highlight">📖 Written Work</div>
+        <div class="highlight">🎨 Masterpiece</div>
+    </div>
+
+    <!-- Navigasi Tab -->
+    <div class="tabs">
+        <button class="tab active" data-tab="posts">📷 Postingan</button>
+        <button class="tab" data-tab="reels">🎥 Reels</button>
+        <button class="tab" data-tab="tagged">🏷️ Ditandai</button>
+    </div>
+
+    <!-- Konten Post -->
+    <div class="tab-content" id="posts">
+        <div class="post-grid">
+            <img src="1.jpg" alt="Post 1">
+            <img src="2.jpg" alt="Post 2">
+            <img src="3.jpg" alt="Post 3">
+        </div>
+    </div>
+
+    <div class="tab-content" id="reels" style="display: none;">
+        <div class="post-grid">
+            <video autoplay loop muted>
+    <source src="1.mp4" type="video/mp4">
+</video>
+        </div>
+    </div>
+
+    <div class="tab-content" id="tagged" style="display: none;">
+        <p>Belum ada postingan ditandai</p>
+    </div>
+
+<!-- Navbar Bawah -->
+    <div class="navbar-bottom">
+        <div class="nav-item active">
+            <i class="fas fa-home"></i>
+            <span>Beranda</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-search"></i>
+            <span>Cari</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-plus-square"></i>
+            <span>Tambah</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-video"></i>
+            <span>Reels</span>
+        </div>
+        <div class="nav-item">
+            <i class="fas fa-user"></i>
+            <span>Profil</span>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+    
+    <script>
+        // Dropdown menu
+const menuBtn = document.getElementById("menu-btn");
+const dropdownMenu = document.getElementById("dropdown-menu");
+
+menuBtn.addEventListener("click", () => {
+    dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
+});
+
+// Klik di luar dropdown buat nutup menu
+window.addEventListener("click", (e) => {
+    if (!menuBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+        dropdownMenu.style.display = "none";
+    }
+});
+    </script>
+</body>
+</html>
