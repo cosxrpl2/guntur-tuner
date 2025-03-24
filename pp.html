@@ -127,18 +127,6 @@ window.addEventListener("click", (e) => {
             item.addEventListener("click", () => {
                 navItems.forEach(i => i.classList.remove("active"));
                 item.classList.add("active");
-
-                // Simulasi pindah halaman
-                if (item.id === "search") {
-                    alert("Fitur Cari belum tersedia!");
-                } else if (item.id === "add") {
-                    alert("Fitur Tambah belum tersedia!");
-                } else if (item.id === "reels") {
-                    alert("Fitur Reels belum tersedia!");
-                } else if (item.id === "profile") {
-                    alert("Fitur Profil belum tersedia!");
-                }
-            });
         });
     </script>
 </body>
