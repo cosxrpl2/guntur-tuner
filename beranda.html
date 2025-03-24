@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beranda</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f8f8f8;
+        }
+        /* Navbar atas */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            padding: 10px 15px;
+            border-bottom: 1px solid #ddd;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+        }
+        .navbar h1 {
+            font-size: 22px;
+        }
+        .icons i {
+            font-size: 20px;
+            margin-left: 15px;
+            cursor: pointer;
+        }
+        /* Feed */
+        .feed {
+            padding: 60px 10px 80px;
+        }
+        .post {
+            background: #fff;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding-bottom: 10px;
+        }
+        .post-header {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+        }
+        .post-header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .post-header h3 {
+            font-size: 16px;
+        }
+        .post img {
+            width: 100%;
+            height: auto;
+        }
+        .post-footer {
+            padding: 10px;
+        }
+        .post-footer i {
+            font-size: 22px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .caption {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        /* Navbar bawah */
+        .navbar-bottom {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: #fff;
+            padding: 10px 0;
+            border-top: 1px solid #ddd;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .nav-item {
+            text-align: center;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .nav-item span {
+            display: block;
+            font-size: 12px;
+        }
+        .active {
+            color: #000;
+        }
+        
+        a {
+            text-decoration: none;
+            color: white;
+        }
+        
+        /* Story Container */
+.stories {
+    display: flex;
+    overflow-x: auto;
+    padding: 10px;
+    background: #fff;
+    margin-top: 50px;
+    white-space: nowrap;
+}
+.story {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid #ff4d4d;
+    margin-right: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.story img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* Story Fullscreen */
+.story-view {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+.story-view img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.close-story {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 25px;
+    color: white;
+    cursor: pointer;
+}
+    </style>
+</head>
+<body>
+
+    <!-- Navbar Atas -->
+    <div class="navbar">
+        <h1>Instagram</h1>
+        <div class="icons">
+    <i class="fas fa-heart"></i>
+    <i class="fas fa-paper-plane" id="dm-btn"></i> <!-- Tambahin ID -->
+</div>
+    </div>
+    
+    
+    <!-- Story -->
+<div class="stories" id="stories">
+    <div class="story" onclick="uploadStory()">
+        <i class="fas fa-plus" style="color: white; background: #ff4d4d; padding: 10px; border-radius: 50%;"></i>
+    </div>
+</div>
+
+<!-- Story Fullscreen -->
+<div class="story-view" id="story-view">
+    <span class="close-story" onclick="closeStory()">&times;</span>
+    <img src="" id="story-img">
+</div>
+
+<!-- Input Upload Story -->
+<!-- Input Upload Story (Hidden) -->
+<input type="file" id="upload-story" accept="image/*" onchange="addStory(event)" style="display: none;">
+
+    <!-- Feed -->
+    <div class="feed">
+        <div class="post">
+            <div class="post-header">
+                <img src="img/1.jpg" alt="User" style="width: 50px; height: 50px; border-radius: 90px;">
+                <h3>user_123</h3>
+            </div>
+            <img src="img/2.jpg" alt="Post">
+            <div class="post-footer">
+                <i class="far fa-heart"></i>
+                <i class="far fa-comment"></i>
+                <i class="far fa-paper-plane"></i>
+                <div class="caption">user_123: Ini caption keren!</div>
+            </div>
+        </div>
+
+        <div class="post">
+            <div class="post-header">
+                <img src="img/pp.jpg" alt="User" style="width: 50px; height: 50px; border-radius: 90px;">
+                <h3>paus_goreng8</h3>
+            </div>
+            <img src="img/1.jpg" alt="Post">
+            <div class="post-footer">
+                <i class="far fa-heart"></i>
+                <i class="far fa-comment"></i>
+                <i class="far fa-paper-plane"></i>
+                <div class="caption">paus_goreng8: Momen terbaik!</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar Bawah -->
+    <div class="navbar-bottom">
+        <div class="nav-item active" id="home">
+            <i class="fas fa-home"></i>
+            <span>Beranda</span>
+        </div>
+        <div class="nav-item" id="search">
+            <i class="fas fa-search"></i>
+            <span><a href="cari.html">Cari</a></span>
+        </div>
+        <div class="nav-item" id="add">
+            <i class="fas fa-plus-square"></i>
+            <span>Tambah</span>
+        </div>
+        <div class="nav-item" id="reels">
+            <i class="fas fa-video"></i>
+            <span><a href="reela.html">Reels</a></span>
+        </div>
+        <div class="nav-item" id="profile">
+            <i class="fas fa-user"></i>
+            <span onclick="window.location.href='pp.html'">Profil</span>
+        </div>
+    </div>
+
+    <script>
+
+        // Like Post (Sementara)
+        const likeIcons = document.querySelectorAll(".fa-heart");
+        likeIcons.forEach(icon => {
+            icon.addEventListener("click", () => {
+                icon.classList.toggle("fas");
+                icon.classList.toggle("far");
+                icon.style.color = icon.classList.contains("fas") ? "red" : "black";
+            });
+        });
+    </script>
+    
+    <script>
+    // Navigasi ke halaman DM
+    document.getElementById("dm-btn").addEventListener("click", function() {
+        window.location.href = "chat.html"; // Pindah ke halaman DM
+    });
+</script>
+
+<script>
+    let storiesData = [];
+
+function uploadStory() {
+    document.getElementById("upload-story").click();
+}
+
+function addStory(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const storyURL = e.target.result;
+            storiesData.push(storyURL);
+            displayStories();
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+function displayStories() {
+    const storiesContainer = document.getElementById("stories");
+    storiesContainer.innerHTML = `<div class="story" onclick="uploadStory()">
+        <i class="fas fa-plus" style="color: white; background: #ff4d4d; padding: 10px; border-radius: 50%;"></i>
+    </div>`;
+
+    storiesData.forEach((story, index) => {
+        const storyElement = document.createElement("div");
+        storyElement.className = "story";
+        storyElement.innerHTML = `<img src="${story}" onclick="viewStory(${index})">`;
+        storiesContainer.appendChild(storyElement);
+    });
+}
+
+function viewStory(index) {
+    document.getElementById("story-view").style.display = "flex";
+    document.getElementById("story-img").src = storiesData[index];
+
+    setTimeout(() => {
+        closeStory();
+    }, 5000);
+}
+
+function closeStory() {
+    document.getElementById("story-view").style.display = "none";
+}
+</script>
+
+</body>
+</html>
