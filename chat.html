@@ -156,7 +156,9 @@
         <div class="menu">
             <div onclick="window.location.href='pp.html'">Profil</div>
             <div onclick="alert('Fitur Setelan belum tersedia!')">Setelan</div>
-            <div onclick="alert('Fitur Logout belum tersedia!')">Logout</div>
+            <div function goBack() {
+    window.history.back();
+  }>Logout</div>
         </div>
 
         <div class="content">
@@ -182,7 +184,7 @@
                 <div class="chat unread" data-name="Teh Utya">
                     <div class="profile-pic"></div>
                     <div class="chat-info">
-                        <h3>Teh Utya</h3>
+                        <h3>Tuner</h3>
                         <p>Loba</p>
                     </div>
                     <span class="time">03:25</span>
