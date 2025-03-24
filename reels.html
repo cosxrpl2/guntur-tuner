@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reels Web</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: black; color: white; font-family: Arial, sans-serif; overflow: hidden; }
+        .reels-container { width: 100%; height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; }
+        .reel { width: 100%; height: 100vh; position: relative; scroll-snap-align: start; }
+        video { width: 100%; height: 100%; object-fit: cover; position: absolute; }
+        .video-info { position: absolute; bottom: 60px; left: 10px; width: 90%; }
+        .username { font-weight: bold; font-size: 16px; }
+        .caption { font-size: 14px; color: #ddd; }
+        .controls { position: absolute; bottom: 100px; left: 10px; display: flex; gap: 10px; }
+        .controls button { background: rgba(0, 0, 0, 0.5); color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        .like-comment { position: absolute; right: 10px; bottom: 70px; display: flex; flex-direction: column; gap: 10px; }
+        .like-comment button { background: rgba(255, 255, 255, 0.2); color: white; border: none; padding: 10px; border-radius: 50%; cursor: pointer; font-size: 18px; }
+    </style>
+</head>
+<body>
+
+    <div class="reels-container">
+        <div class="reel">
+            <video class="reel-video" src="img/1.mp4" loop muted playsinline></video>
+            <div class="video-info">
+                <div class="username">@guntur_padilah</div>
+                <div class="caption">Ini adalah video pertama! 🔥</div>
+            </div>
+            <div class="controls">
+                <button onclick="togglePlayPause(this)">▶️</button>
+                <button onclick="toggleMute(this)">🔇</button>
+            </div>
+            <div class="like-comment">
+                <button onclick="likeVideo(this)">❤️</button>
+                <button onclick="commentVideo()">💬</button>
+            </div>
+        </div>
+
+        <div class="reel">
+            <video class="reel-video" src="img/3.mp4" loop muted playsinline></video>
+            <div class="video-info">
+                <div class="username">@vina_lovely</div>
+                <div class="caption">Jalan-jalan ke pantai 🌊✨</div>
+            </div>
+            <div class="controls">
+                <button onclick="togglePlayPause(this)">▶️</button>
+                <button onclick="toggleMute(this)">🔇</button>
+            </div>
+            <div class="like-comment">
+                <button onclick="likeVideo(this)">❤️</button>
+                <button onclick="commentVideo()">💬</button>
+            </div>
+        </div>
+
+    <script>
+        function togglePlayPause(button) {
+            const video = button.closest(".reel").querySelector(".reel-video");
+            if (video.paused) {
+                video.play();
+                button.textContent = "⏸️";
+            } else {
+                video.pause();
+                button.textContent = "▶️";
+            }
+        }
+
+        function toggleMute(button) {
+            const video = button.closest(".reel").querySelector(".reel-video");
+            video.muted = !video.muted;
+            button.textContent = video.muted ? "🔇" : "🔊";
+        }
+
+        function likeVideo(button) {
+            button.style.color = button.style.color === "red" ? "white" : "red";
+        }
+
+        function commentVideo() {
+            alert("Fitur komentar belum dibuat! 😅");
+        }
+
+        function autoPlayReels() {
+            const videos = document.querySelectorAll('.reel-video');
+            videos.forEach(video => {
+                const rect = video.getBoundingClientRect();
+                if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+                    if (video.paused) {
+                        video.play();
+                    }
+                } else {
+                    video.pause();
+                }
+            });
+        }
+
+        document.querySelector('.reels-container').addEventListener('scroll', autoPlayReels);
+        document.addEventListener('DOMContentLoaded', autoPlayReels);
+    </script>
+
+</body>
+</html>
