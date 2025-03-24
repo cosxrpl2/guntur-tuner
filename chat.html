@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chat</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .app {
+            width: 360px;
+            height: 620px;
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: #202020;
+            position: relative;
+        }
+
+        .icons span {
+            margin-left: 15px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        /* SEARCH BOX */
+        .search-box {
+            display: none;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            width: 100%;
+            padding: 10px;
+            background: #333;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        /* MENU */
+        .menu {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    background: #333;
+    border-radius: 5px;
+    overflow: hidden;
+    width: 150px; /* Tambahin width biar lebih besar */
+    padding: 5px; /* Biar lebih lega */
+}
+
+.menu div {
+    padding: 12px; /* Biar lebih gampang diklik */
+    font-size: 16px; /* Teks lebih gede */
+}
+
+        .menu div:hover {
+            background: #444;
+        }
+        
+        /* KONTEN UTAMA */
+        .content {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .chat {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid #333;
+            cursor: pointer;
+        }
+
+        .chat:hover {
+            background-color: #292929;
+        }
+
+        .profile-pic {
+            width: 50px;
+            height: 50px;
+            background-color: gray;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .chat-info {
+            flex-grow: 1;
+        }
+
+        .chat-info h3 {
+            font-size: 16px;
+        }
+
+        .chat-info p {
+            font-size: 14px;
+            color: #bbb;
+        }
+
+        .time {
+            font-size: 12px;
+            color: #bbb;
+        }
+
+        
+    </style>
+</head>
+<body>
+
+    <div class="app">
+        <header>
+            <h2>Pesan</h2>
+            <div class="icons">
+                <span onclick="toggleSearch()">🔍</span>
+                <span onclick="toggleMenu()">⋮</span>
+            </div>
+        </header>
+
+        <!-- SEARCH BOX -->
+        <div class="search-box">
+            <input type="text" id="search" placeholder="Cari chat..." onkeyup="searchChat()">
+        </div>
+
+        <!-- MENU -->
+        <div class="menu">
+            <div onclick="window.location.href='pp.html'">Profil</div>
+            <div onclick="alert('Fitur Setelan belum tersedia!')">Setelan</div>
+            <div onclick="alert('Fitur Logout belum tersedia!')">Logout</div>
+        </div>
+
+        <div class="content">
+            <div class="chats">
+                <div class="chat" data-name="I Am Ultraman">
+                    <div class="profile-pic"></div>
+                    <div class="chat-info">
+                        <h3>I Am Ultraman</h3>
+                        <p>Halo! Apa kabar?</p>
+                    </div>
+                    <span class="time">07/03/25</span>
+                </div>
+
+                <div class="chat" data-name="My Little Star">
+                    <div class="profile-pic"></div>
+                    <div class="chat-info">
+                        <h3>Ucup</h3>
+                        <p>✔✔ Dibuka</p>
+                    </div>
+                    <span class="time">03:25</span>
+                </div>
+
+                <div class="chat unread" data-name="Teh Utya">
+                    <div class="profile-pic"></div>
+                    <div class="chat-info">
+                        <h3>Teh Utya</h3>
+                        <p>Loba</p>
+                    </div>
+                    <span class="time">03:25</span>
+                </div>
+                
+                <div class="chat unread" data-name="INFO SMK JAYA">
+                    <div class="profile-pic"></div>
+                    <div class="chat-info">
+                        <h3>INFO SMK JAYA</h3>
+                        <p>Kang: 📷 Foto</p>
+                    </div>
+                    <span class="time">03:00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSearch() {
+            let searchBox = document.querySelector('.search-box');
+            searchBox.style.display = searchBox.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function searchChat() {
+            let input = document.getElementById('search').value.toLowerCase();
+            let chats = document.querySelectorAll('.chat');
+
+            chats.forEach(chat => {
+                let name = chat.getAttribute('data-name').toLowerCase();
+                if (name.includes(input)) {
+                    chat.style.display = 'flex';
+                } else {
+                    chat.style.display = 'none';
+                }
+            });
+        }
+
+        function toggleMenu() {
+    let menu = document.querySelector('.menu');
+    menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+}
+
+// Tutup menu kalau klik di luar
+document.addEventListener('click', function(event) {
+    let menu = document.querySelector('.menu');
+    let menuButton = document.querySelector('.icons span:last-child');
+
+    if (menu.style.display === 'block' && !menu.contains(event.target) && event.target !== menuButton) {
+        menu.style.display = 'none';
+    }
+});
+    </script>
+
+</body>
+</html>
