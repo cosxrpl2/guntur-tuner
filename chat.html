@@ -156,9 +156,13 @@
         <div class="menu">
             <div onclick="window.location.href='pp.html'">Profil</div>
             <div onclick="alert('Fitur Setelan belum tersedia!')">Setelan</div>
-            <div function goBack() {
-    window.history.back();
-  }>Logout</div>
+            <div onclick="goBack()">Kembali</div>
+
+<script>
+  function goBack() {
+    window.history.back(); // Kembali ke halaman sebelumnya
+  }
+</script>
         </div>
 
         <div class="content">
